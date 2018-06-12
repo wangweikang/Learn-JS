@@ -37,3 +37,14 @@ async function asyncMain() {
         console.error(err);
     }
 }
+
+export async function list(ctx, next) {
+    try {
+        let students = await Student.getAllAsync();
+        await ctx.render('students/index', {
+            students: students
+        })
+    } catch (err) {
+        return ctx.api_error(err);
+    }
+}
